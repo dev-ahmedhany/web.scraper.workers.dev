@@ -81,11 +81,11 @@ async function handleAPIRequest2({ url, pretty=true }) {
     x=5
     await scraper.fetch("https://aero.egybest.golf"+result)
     x=6
-    result2 = await scraper.querySelector("body").getText({ spaced:true })
+    result2 = await scraper.querySelector("html").getText({ spaced:true })
     x=7
     scraper =  new Scraper()
     x=8
-    await scraper.fetch("https://aero.egybest.golf"+result)
+    await scraper.fetch("https://aero.egybest.golf"+result+"&r")
     x=9
     result3 = await scraper.querySelector("html").getText({ spaced:true })
     x=10
