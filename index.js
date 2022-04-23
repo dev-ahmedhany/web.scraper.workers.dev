@@ -81,14 +81,14 @@ async function handleAPIRequest2({ url, pretty=true }) {
     x=5
     await scraper.fetch("https://aero.egybest.golf"+result)
     x=6
-    result2 = await scraper.querySelector("#video_html5_api > source").getAttribute("src")
+    result2 = await scraper.querySelector("body").getText({ spaced:true })
     x=7
     scraper =  new Scraper()
     x=8
     await scraper.fetch("https://aero.egybest.golf"+result)
-    x=7
-    result3 = await scraper.querySelector("#mainLoad > div:nth-child(1) > div.h_scroll > div > a:nth-child(4) > img").getAttribute("src")
-    x=8
+    x=9
+    result3 = await scraper.querySelector("html").getText({ spaced:true })
+    x=10
   } catch (error) {
     return generateErrorJSONResponse(error, pretty, x)
   }
