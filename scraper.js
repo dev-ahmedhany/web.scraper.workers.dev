@@ -12,8 +12,7 @@ class Scraper {
 
   async fetch(url) {
     this.url = url
-    const request = new Request(url)
-    this.response = await fetch(request)
+    this.response = await fetch(url)
 
     const server = this.response.headers.get('server')
 

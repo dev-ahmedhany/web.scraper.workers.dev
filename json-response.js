@@ -11,9 +11,10 @@ const generateJSONResponse = (obj, pretty) => {
   })
 }
 
-const generateErrorJSONResponse = (error, pretty) => {
+const generateErrorJSONResponse = (error, pretty, x) => {
   return generateJSONResponse({
-    error: typeof error === 'string' ? error : error.message
+    error: typeof error === 'string' ? error : error.message,
+    x
   }, pretty)
 }
 
