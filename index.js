@@ -79,7 +79,7 @@ async function handleAPIRequest2({ url, pretty=true }) {
     x=4
     await scraper.fetch("https://aero.egybest.golf"+result)
     x=5
-    result2 = await scraper.querySelector("#video_html5_api > source").getAttribute("src")
+    // result2 = await scraper.querySelector("#video_html5_api > source").getAttribute("src")
     x=6
     result3 = await scraper.querySelector("#mainLoad > div:nth-child(1) > div.h_scroll > div > a:nth-child(4) > img").getAttribute("src")
     x=7
