@@ -17,6 +17,11 @@ async function handleRequest(request) {
   const attr = searchParams.get('attr')
   const spaced = searchParams.get('spaced') // Adds spaces between tags
   const pretty = searchParams.get('pretty')
+  const egybest = searchParams.get('egybest')
+
+  if(url && egybest){
+    return handleAPIRequest2({ url })
+  }
 
   if (!url || !selector) {
     return handleSiteRequest(request)
@@ -58,4 +63,18 @@ async function handleAPIRequest({ url, selector, attr, spaced, pretty }) {
   }
 
   return generateJSONResponse({ result }, pretty)
+}
+
+async function handleAPIRequest2({ url, pretty=true }) {
+  let scraper, result, response
+
+  try {
+    scraper = await new Scraper().fetch(url)
+    result = await scraper.querySelector("#watch_dl iframe").getAttribute("src")
+    response = scraper.getResponse()
+  } catch (error) {
+    return generateErrorJSONResponse(error, pretty)
+  }
+
+  return generateJSONResponse({ result, response }, pretty)
 }

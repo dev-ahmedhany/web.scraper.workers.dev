@@ -6,6 +6,10 @@ class Scraper {
     return this
   }
 
+  getResponse() {
+    return this.response
+  }
+
   async fetch(url) {
     this.url = url
     this.response = await fetch(url)
