@@ -7,12 +7,13 @@ class Scraper {
   }
 
   getResponse() {
-    return this.response.headers
+    return this.response.headers.getAll("set-cookie")
   }
 
   async fetch(url) {
     this.url = url
-    this.response = await fetch(url)
+    const request = new Request(url, this.response)
+    this.response = await fetch(request)
 
     const server = this.response.headers.get('server')
 
