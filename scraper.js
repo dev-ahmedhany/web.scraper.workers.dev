@@ -7,7 +7,7 @@ class Scraper {
   }
 
   getResponse() {
-    return this.response
+    return this.response.headers
   }
 
   async fetch(url) {

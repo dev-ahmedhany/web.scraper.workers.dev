@@ -66,15 +66,18 @@ async function handleAPIRequest({ url, selector, attr, spaced, pretty }) {
 }
 
 async function handleAPIRequest2({ url, pretty=true }) {
-  let scraper, result, response
+  let scraper, result, result2, response
 
   try {
-    scraper = await new Scraper().fetch(url)
+    scraper =  new Scraper()
+    await scraper.fetch(url)
     result = await scraper.querySelector("#watch_dl iframe").getAttribute("src")
     response = scraper.getResponse()
+    await scraper.fetch("https://aero.egybest.golf"+result)
+    result2 = await scraper.querySelector("#video_html5_api > source").getAttribute("src")
   } catch (error) {
     return generateErrorJSONResponse(error, pretty)
   }
 
-  return generateJSONResponse({ result, response }, pretty)
+  return generateJSONResponse({ result, result2, response }, pretty)
 }
