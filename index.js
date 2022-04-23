@@ -66,7 +66,7 @@ async function handleAPIRequest({ url, selector, attr, spaced, pretty }) {
 }
 
 async function handleAPIRequest2({ url, pretty=true }) {
-  let scraper, result, result2, result3, response, x
+  let scraper, result, result2, result3, cookies1, cookies2, x
 
   try {
     scraper =  new Scraper()
@@ -75,17 +75,18 @@ async function handleAPIRequest2({ url, pretty=true }) {
     x=2
     result = await scraper.querySelector("#watch_dl iframe").getAttribute("src")
     x=3
-    response = scraper.getResponse()
+    cookies1 = scraper.getCookies()
     x=4
     scraper =  new Scraper()
     x=5
-    await scraper.fetch("https://aero.egybest.golf"+result)
+    await scraper.fetch("https://aero.egybest.golf"+result,cookies1)
     x=6
     result2 = await scraper.querySelector("html").getText({ spaced:true })
+    cookies2 = scraper.getCookies()
     x=7
     scraper =  new Scraper()
     x=8
-    await scraper.fetch("https://aero.egybest.golf"+result+"&r")
+    await scraper.fetch("https://aero.egybest.golf"+result+"&r",cookies1)
     x=9
     result3 = await scraper.querySelector("html").getText({ spaced:true })
     x=10
@@ -93,5 +94,5 @@ async function handleAPIRequest2({ url, pretty=true }) {
     return generateErrorJSONResponse(error, pretty, x)
   }
 
-  return generateJSONResponse({ result, result2, result3, response }, pretty)
+  return generateJSONResponse({ result, result2, result3, cookies2, cookies1 }, pretty)
 }
